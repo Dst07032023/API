@@ -6,6 +6,7 @@ import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import javafx.beans.binding.When;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class SpartanGetRequests {
@@ -50,4 +51,19 @@ public class SpartanGetRequests {
     And content type should be application/json
     And json body should contain Fidole
      */
+
+    @DisplayName("GET one spartan /api/spartans/3 and verify")
+    @Test
+    public void test2(){
+        Response response = RestAssured.given().accept(ContentType.JSON).
+                when().get(baseUrl + "/api/spartans/3");
+
+        //verify status code 200
+        Assertions.assertEquals(response.statusCode(),200);
+
+        //verify content type
+        Assertions.assertEquals(response.contentType(),"application/json",response.contentType());
+        //verify json body contains Fidole
+        Assertions.assertTrue(response.body().asString().contains("Fidole"));
+    }
 }
