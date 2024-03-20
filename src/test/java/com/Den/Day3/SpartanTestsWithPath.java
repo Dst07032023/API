@@ -1,5 +1,6 @@
 package com.Den.Day3;
 
+import com.Den.utilities.SpartanTestBase;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeAll;
@@ -12,7 +13,7 @@ import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class SpartanTestsWithPath {
+public class SpartanTestsWithPath extends SpartanTestBase {
 
     @BeforeAll
     public static void init(){
@@ -79,7 +80,7 @@ public class SpartanTestsWithPath {
         String name = response.path("name[0]");
         System.out.println("name = " + name);
 
-        String lastFirstName = response.path("name[-2]");
+        String lastFirstName = response.path("name[-1]");
         System.out.println("lastFirstName = " + lastFirstName);
 
         //save names inside the list of string
