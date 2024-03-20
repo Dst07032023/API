@@ -16,7 +16,7 @@ public class HrGetRequests {
     @BeforeAll
     public static void init(){
         //save baseurl inside this variable so that we don't need to type each http method
-        RestAssured.baseURI = "http://52.207.61.129:1000/ords/hr";
+        baseURI = "http://52.207.61.129:1000/ords/hr";
     }
 
     @DisplayName("GET request to /regions")
