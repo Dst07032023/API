@@ -59,5 +59,6 @@ public class ORDSApiWithJsonPath extends HRTestBase {
         String kingFirstName = jsonPath.getString("items.max{it.salary}.first_name");
         String kingNameWithPathMethod = response.path("items.max {it.salary}.first_name");
         System.out.println("kingFirstName = " + kingFirstName);
+        System.out.println("kingNameWithPathMethod = " + kingNameWithPathMethod);
     }
 }
