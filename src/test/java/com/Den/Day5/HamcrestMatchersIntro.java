@@ -1,12 +1,15 @@
 package com.Den.Day5;
 
 import static org.hamcrest.Matchers.*;
+
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class HamcrestMatchersIntro {
 
+    @DisplayName("Assertion with numbers")
     @Test
     public void simpleTest1() {
 
@@ -29,5 +32,34 @@ public class HamcrestMatchersIntro {
         //lessThan()
         //lessThanOrEqualTo()
         assertThat(5+5,is(greaterThan(9)));
+    }
+
+    @DisplayName("Assertion with String")
+    @Test
+    public void stringHamcrest(){
+
+        String text = "B22 is learning Hamcrest";
+
+        //checking for euqality is same as numbers
+        assertThat(text,is("B22 is learning Hamcrest"));
+        assertThat(text,equalTo("B22 is learning Hamcrest"));
+        assertThat(text,is(equalTo("B22 is learning Hamcrest")));
+
+        //check if this text starts with B22
+        assertThat(text,startsWith("B22"));
+        //now do it case insensitive manner
+        assertThat(text,startsWithIgnoringCase("B22"));
+        //ends with
+        assertThat(text,endsWith("rest"));
+
+        //check if text contains String learning
+        assertThat(text,containsString("learning"));
+        assertThat(text,containsStringIgnoringCase("LEARNING"));
+
+        String str = " ";
+         //check if above str is blank
+        assertThat(str,blankString());
+        //check if trimmed str is empty string
+        assertThat(str.trim(),emptyString());
     }
 }
