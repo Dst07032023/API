@@ -31,7 +31,7 @@ public class SpartanNegativeGetTest {
         Response response = given()
                                      .accept(ContentType.XML)
                             .when()
-                                     .get("/api/spartans/10");
+                                     .get("/api/spartans/search");
         //verify status code is 406
         assertEquals(406,response.statusCode());
         //verify content type
