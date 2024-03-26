@@ -1,5 +1,6 @@
 package com.Den.Day5;
 
+import com.Den.Day4.CBTrainingApiWithJsonPath;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -39,6 +40,32 @@ public class HamcrestMatchersApiTest {
                 .and()
                 .body("id",equalTo(15),"name",is("Meta"),
                         "gender",is("Female"),"phone",is(1938695106));
+    }
+
+    @DisplayName("CBTraining Teacher request with chaining and matchers")
+    @Test
+    public void teacherData(){
+
+        given()
+                .accept(ContentType.JSON)
+                .and()
+                .pathParam("id",10423)
+        .when()
+                .get("http://api.cybertektraining.com/teacher/{id}")
+        .then()
+                .statusCode(200)
+                .and()
+                .contentType("application/json;charset=UTF-8")
+                .and()
+                .header("Content-Length",is("236"))
+                .and()
+                .header("Date",notNullValue())
+                .and().assertThat()
+                .body("teachers[0].firstName",is("Alexander"))
+                .body("teachers[0].lastName",is("Syrup"))
+                .body("teachers[0].gender",equalTo("male"));
+
+
 
 
 
