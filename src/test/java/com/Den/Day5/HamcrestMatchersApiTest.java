@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.*;
+import static java.lang.Math.log;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
@@ -29,7 +30,8 @@ public class HamcrestMatchersApiTest {
     @Test
     public void test1(){
 
-        given().accept(ContentType.JSON)
+        given().log().all().
+                accept(ContentType.JSON)
                 .and().pathParam("id",15)
         .when()
                 .get("http://52.207.61.129:8000/api/spartans/{id}")
@@ -39,7 +41,8 @@ public class HamcrestMatchersApiTest {
                 .contentType("application/json")
                 .and()
                 .body("id",equalTo(15),"name",is("Meta"),
-                        "gender",is("Female"),"phone",is(1938695106));
+                        "gender",is("Female"),"phone",is(1938695106))
+        .log().all();
     }
 
     @DisplayName("CBTraining Teacher request with chaining and matchers")
