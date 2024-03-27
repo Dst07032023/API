@@ -1,5 +1,6 @@
 package com.Den.Day6;
 
+import com.Den.pojo.Search;
 import com.Den.pojo.Spartan;
 import com.Den.utilities.SpartanTestBase;
 import io.restassured.http.ContentType;
@@ -63,6 +64,21 @@ public class SpartanPojoGetRequestTest extends SpartanTestBase {
             System.out.println("s1 = " + s1);
             System.out.println("s1.getName() = " + s1.getName());
             System.out.println("s1.getGender() = " + s1.getGender());
+        }
+
+        @Test
+    public void test3(){
+            Response response = given().accept(ContentType.JSON)
+                    .and().queryParam("nameContains","a",
+                            "gender","Male")
+                    .when().get("/api/spartans/search")
+                    .then().statusCode(200)
+                    .extract().response();
+
+            Search searchResult = response.as(Search.class);
+
+            System.out.println(searchResult.getContent().get(0).getName());
+
         }
 
 }
