@@ -1,5 +1,6 @@
 package com.Den.utilities;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 
 import static io.restassured.RestAssured.baseURI;
@@ -18,5 +19,11 @@ public abstract class SpartanTestBase {
         String dbPassword = "SP";
 
         DBUtils.createConnection(dbUrl,dbUsername,dbPassword);
+    }
+
+    @AfterAll
+    public void teardown(){
+
+        DBUtils.destroy();
     }
 }
