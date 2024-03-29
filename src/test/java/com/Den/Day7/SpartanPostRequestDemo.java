@@ -1,6 +1,13 @@
 package com.Den.Day7;
 
 import com.Den.utilities.SpartanTestBase;
+import io.restassured.http.ContentType;
+import io.restassured.response.Response;
+import org.junit.jupiter.api.Test;
+
+import static io.restassured.RestAssured.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 
 public class SpartanPostRequestDemo extends SpartanTestBase {
 
@@ -19,8 +26,28 @@ public class SpartanPostRequestDemo extends SpartanTestBase {
      "A Spartan is Born!" message
      and same data what is posted
      */
+    @Test
+    public void postMethod1() {
 
+        String requestJsonBody = "{\"gender\":\"Male\",\n" +
+                "\"name\":\"Severus\",\n" +
+                "\"phone\":8877445596";
 
+        Response response = given().accept(ContentType.JSON).and()
+                                    .contentType(ContentType.JSON)
+                                    .body(requestJsonBody)
+                            .when()
+                                    .post("/api/spartans");
+
+        assertThat(response.statusCode(),is(201));
+        assertThat(response.contentType(),is("application/json"));
+
+        String expectedResponceMessage = "A Spartan is Born!";
+        assertThat(response.path("succes"),is(expectedResponceMessage));
+        assertThat(response.path("data.name"),is("Severus"));
+        assertThat(response.path("data.gender"),is("Male"));
+        assertThat(response.path("data.phone"),is(8877445596L));
+    }
 
 
 }
